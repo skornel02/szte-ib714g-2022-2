@@ -1,0 +1,16 @@
+{
+    "name": "szte-ib714g-2022-2",
+    "version": "1.0.0",
+    "description": "Pápa projekt",
+    "scripts": {
+        "lint": "prettier -c .",
+        "format": "prettier -w ."
+    },
+    "keywords": [],
+    "author": "",
+    "license": "ISC",
+    "dependencies": {
+        "@prettier/plugin-php": "^0.19.3",
+        "prettier": "^2.8.4"
+    }
+}
