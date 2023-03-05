@@ -15,13 +15,7 @@
 -   [ ] 3. mérföldkő:
     -   beadási határidő: 2023. április. 16. 23:59:00 2023.
 
-<details>
-<summary>
-
 ## 1. mérföldkő követelmények
-
-</summary>
-<p>
 
 1.  Alapvető elemek (ezek mindenképp kellenek) - 10 pont veszteség minden hiányosságért.
 
@@ -34,7 +28,7 @@
         -   [ ] Ki lett választva határidőig.
         -   [ ] Minden oldal a témával kapcsolatos.
     -   [ ] Szabványos HTML oldalak
-        -   [ ] Legalább 5 darab _szabványos_ HTML oldal _kellő_ részleteséggel.
+        -   [x] Legalább 5 darab _szabványos_ HTML oldal _kellő_ részleteséggel.
     -   [ ] Felhasznált technológiák
         -   [ ] Csak használható technológiákat tartalmaz _(lásd CooSpace)_.
     -   [x] Súlyos hibák
@@ -102,14 +96,7 @@
         -   [ ] Árnyékok használata (0/1 pont).
         -   [ ] Transzformálás használata (mindegyik 1 pont, max 2 pont).
 
-</p>
-</details>
-<details>
-<summary>
-
 ## 2. mérföldkő követelmények
-
-</summary>
 
 1. Alapvető elemek (ezek mindenképp kellenek) - 10 pont veszteség minden hiányosságért.
     - [ ] Formai követelmények
@@ -168,9 +155,4 @@
         - [ ] Jogosultsági szintek megvalósítva (admin, felhasználók) (0/4/8 pont).
         - [ ] Egyéb funkciók (0/4/8 pont).
 
-</details>
-        
-        
-        
-        
 [^1]: A pontok csak igényesen megvalósított funkciók esetén járnak.

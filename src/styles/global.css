@@ -1,0 +1,40 @@
+:root {
+    --color-neutral: #fff;
+    --color-text-primary: #000;
+}
+
+body {
+    margin: 0;
+    background-color: var(--color-neutral);
+    color: var(--color-text-primary);
+}
+
+nav {
+    position: sticky;
+    top: 0;
+}
+
+nav ul {
+    list-style-type: none;
+    display: flex;
+    justify-content: space-between;
+    margin: 0;
+    padding: 0;
+}
+
+nav a:visited {
+    color: inherit;
+}
+
+nav a:link {
+    text-decoration: unset;
+    color: inherit;
+}
+
+nav li {
+    background-color: grey;
+}
+
+nav li:has(a.active) {
+    background-color: white;
+}
