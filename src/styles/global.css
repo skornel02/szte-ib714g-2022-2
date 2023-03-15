@@ -4,6 +4,7 @@
     --color-nav-background: rgb(22, 173, 243);
     --color-nav-selected: var(--color-neutral);
     --color-nav-hover: rgb(15, 120, 168);
+    --color-hero-background: #f7f3eb;
 }
 
 body {
@@ -20,6 +21,7 @@ nav {
     flex-direction: column;
     justify-content: center;
     background-color: var(--color-nav-background);
+    z-index: 10;
 }
 
 nav ul {
@@ -81,6 +83,20 @@ h2, h3, h4, h5, h6 {
     text-transform: uppercase;
 }
 
+p, li, a {
+    font-family: 'Roboto', sans-serif;
+    line-height: 1.4em;
+}
+
+a {
+    font-variant: small-caps;
+    color: var(--color-nav-background);
+}
+
+.highlighted-text {
+    font-style: italic;
+}
+
 .image {
     max-width: 100%;
     min-width: 320px;
@@ -98,6 +114,10 @@ h2, h3, h4, h5, h6 {
     height: auto;
 }
 
+.image-right {
+    float: right;
+}
+
 form fieldset {
     display: flex;
     flex-direction: column;
@@ -106,4 +126,39 @@ form fieldset {
 
 form fieldset label {
     margin: 5px;
+}
+
+blockquote {
+    font-variant: small-caps;
+}
+
+#hero {
+    width: 100%;
+    background-color: var(--color-hero-background);
+}
+
+.video-container {
+    position: relative;
+    z-index: 0;
+    display: flex;
+    justify-content: center;
+    width: 100%;
+}
+
+.video-container > video {
+    width: 65%;
+    display: block;
+    margin: 3vh auto;
+    box-shadow: 0 0 50px 2px var(--color-text-primary);
+    border-radius: 5px;
+}
+
+.video-container > .text-highlight {
+    width: 65%;
+    position: absolute;
+    top: 50%;
+    background-color: #00000060;
+    border-top: 5px solid var(--color-neutral);
+    border-bottom: 5px solid var(--color-neutral);
+    color: var(--color-neutral);
 }
