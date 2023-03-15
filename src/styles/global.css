@@ -1,6 +1,9 @@
 :root {
     --color-neutral: #fff;
     --color-text-primary: #000;
+    --color-nav-background: rgb(22, 173, 243);
+    --color-nav-selected: var(--color-neutral);
+    --color-nav-hover: rgb(15, 120, 168);
 }
 
 body {
@@ -12,29 +15,95 @@ body {
 nav {
     position: sticky;
     top: 0;
+    min-height: 50px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    background-color: var(--color-nav-background);
 }
 
 nav ul {
     list-style-type: none;
     display: flex;
-    justify-content: space-between;
+    flex-wrap: wrap;
+    justify-content: space-around;
     margin: 0;
-    padding: 0;
+    padding: 10px;
 }
 
 nav a:visited {
     color: inherit;
 }
 
+nav a:focus {
+    outline: none;
+}
+
 nav a:link {
     text-decoration: unset;
     color: inherit;
+    text-transform: uppercase;
+    font-weight: bold;
 }
 
 nav li {
-    background-color: grey;
+    padding: 10px;
+    transition: background-color border-color 0.3s;
+    border-radius: 5px;
+    border: 5px dotted transparent;
 }
 
 nav li:has(a.active) {
-    background-color: white;
+    background-color: var(--color-nav-selected);
+}
+
+nav li:hover {
+    background-color: var(--color-nav-hover);
+}
+
+nav li:focus-within {
+    border-color: var(--color-nav-hover);
+}
+
+main {
+    max-width: 800px;
+    margin: 0 auto;
+}
+
+h1 {
+    text-align: center;
+    text-transform: capitalize;
+    font-family: 'Roboto', sans-serif;
+}
+
+h2, h3, h4, h5, h6 {
+    font-family: 'Roboto', sans-serif;
+    text-transform: uppercase;
+}
+
+.image {
+    max-width: 100%;
+    min-width: 320px;
+}
+
+.center-image {
+    display: block;
+    margin-left: auto;
+    margin-right: auto;
+    width: 50%;
+}
+
+.image-fluid {
+    max-width: 100%;
+    height: auto;
+}
+
+form fieldset {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+form fieldset label {
+    margin: 5px;
 }
