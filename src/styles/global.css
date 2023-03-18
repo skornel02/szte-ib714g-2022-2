@@ -129,6 +129,10 @@ a {
     float: right;
 }
 
+.round-image {
+    border-radius: 50%;
+}
+
 form fieldset {
     display: flex;
     flex-direction: column;
@@ -196,11 +200,41 @@ aside {
 }
 
 button {
-    width: 20%;
     height: 1.7rem;
     border-radius: 20px;
     background-color: var(--color-hero-background);
     border: 1px solid var(--color-transparent-black);
+    cursor: pointer;
+    width: 70%;
+    margin: 1vh 0;
+    display: block;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+button:hover {
+    background-color: var(--color-nav-background);
+}
+
+input:not([type="date"]) {
+    width: 100%;
+    border-radius: 5px;
+    padding: 1vh;
+    display: inline-block;
+    box-sizing: border-box;
+    border: 1px solid var(--color-transparent-black);
+}
+
+input[type="date"] {
+    width: 100%;
+    border-radius: 5px;
+    border: 1px solid var(--color-transparent-black);
+}
+
+select {
+    width: 100%;
+    border-radius: 5px;
+    padding: 1vh;
 }
 
 footer {
@@ -221,6 +255,11 @@ table {
     width: 90%;
     margin-left: auto;
     margin-right: auto;
+    border-collapse: collapse;
+}
+
+tr:hover {
+    background-color: var(--color-hero-background);
 }
 
 .row {
@@ -241,6 +280,26 @@ table {
     width: 100%;
 }
 
+img[title="Ranglétra"] {
+    margin-bottom: 2vh;
+}
+
+#login-fields {
+    display: flex;
+    flex-direction: column;
+    flex-wrap: wrap;
+    align-items: center;
+    gap: 10px;
+}
+
+#login-buttons {
+    margin-top: 2vh;
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    gap: 10px;
+}
+
 @media screen and (max-width: 800px) {
     .column {
       flex: 100%;
@@ -255,14 +314,6 @@ table {
     aside {
         margin-left: auto;
         margin-right: auto;
-        max-width: 100%;
-    }
-}
-  
-/* Responsive layout - makes the two columns stack on top of each other instead of next to each other */
-@media screen and (max-width: 600px) {
-    .column {
-        flex: 100%;
         max-width: 100%;
     }
 }
