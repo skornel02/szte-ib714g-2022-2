@@ -91,6 +91,15 @@ p, li, a, th {
     line-height: 1.4em;
 }
 
+h2 + p::first-letter {
+    initial-letter: 2;
+    padding-right: 5px;
+}
+
+p::first-line {
+    line-height: 2em;
+}
+
 caption {
     font-family: 'Roboto', sans-serif;
     font-style: italic;
@@ -129,6 +138,7 @@ a {
 
 .image-right {
     float: right;
+    clear: both;
 }
 
 .round-image {
@@ -178,7 +188,7 @@ q {
     border-radius: 5px;
 }
 
-.video-container > .text-highlight {
+.text-highlight {
     width: 65%;
     position: absolute;
     top: 50%;
@@ -218,6 +228,7 @@ button {
 
 button:hover {
     background-color: var(--color-nav-background);
+    color: var(--color-neutral);
 }
 
 input:not([type="date"]) {
@@ -295,8 +306,12 @@ img[title="Ranglétra"] {
     margin-bottom: 2vh;
 }
 
-.image-fade-in {
-    animation: image-fade-in 2s;
+.fade-and-scale {
+    animation: fade-in-and-scale 2s;
+}
+
+.move-in {
+    animation: move-in 2s ease-in-out;
 }
 
 #login-fields {
@@ -322,7 +337,7 @@ img[title="Ranglétra"] {
     to {color: var(--color-neutral);}
 }
 
-@keyframes image-fade-in {
+@keyframes fade-in-and-scale {
     0% {
         scale: 0.666;
         opacity: 0;
@@ -332,6 +347,16 @@ img[title="Ranglétra"] {
     }
     100% {
         scale: 1;
+    }
+}
+
+@keyframes move-in {
+    from {
+        transform: translateX(200px);
+    }
+
+    to {
+        transform: translateX(0);
     }
 }
 
@@ -351,5 +376,54 @@ img[title="Ranglétra"] {
         margin-left: auto;
         margin-right: auto;
         max-width: 100%;
+    }
+}
+
+@media screen and (max-width: 576px) {
+    .image-right {
+        float: none;
+        display: block;
+        margin-left: auto;
+        margin-right: auto;
+    }
+}
+
+/* Nyomtatási stíluslapok */
+
+@media print {
+    nav, audio, a {
+        display: none;
+    }
+
+    #aside-container {
+        flex-direction: column;
+        gap: 0;
+        width: 100%;
+    }
+
+    aside {
+        max-width: 100%;
+    }
+
+    .fade-and-scale {
+        animation: none;
+    }
+
+    .video-container > video {
+        box-shadow: none;
+    }
+
+    section {
+        break-inside: avoid;
+    }
+
+    .text-highlight {
+        background-color: var(--color-neutral);
+        border: none;
+        color: var(--color-text-primary);
+    }
+
+    footer::before {
+        content: 'Nyomtatási kép!';
     }
 }
