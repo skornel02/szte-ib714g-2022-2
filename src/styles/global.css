@@ -6,20 +6,27 @@
     --color-nav-hover: rgb(15, 120, 168);
     --color-hero-background: #f7f3eb;
     --color-transparent-black: #00000060;
+
+    --nav-height: 100px;
 }
 
 /* Formázások */
 
 body {
+    min-height: 100vh;
     margin: 0;
     background-color: var(--color-neutral);
     color: var(--color-text-primary);
+    display: flex;
+    flex-direction: column;
+
+    counter-reset: sorok;
 }
 
 nav {
     position: sticky;
     top: 0;
-    min-height: 50px;
+    min-height: var(--nav-height);
     display: flex;
     flex-direction: column;
     justify-content: center;
@@ -53,7 +60,7 @@ nav a:link {
 
 nav li {
     padding: 10px;
-    transition: background-color border-color 0.3s;
+    transition: 0.5s background-color;
     border-radius: 5px;
     border: 5px dotted transparent;
 }
@@ -73,17 +80,20 @@ nav li:focus-within {
 main {
     max-width: 800px;
     margin: 0 auto;
+    flex-grow: 1;
 }
 
 h1 {
     text-align: center;
     text-transform: capitalize;
     font-family: 'Roboto', sans-serif;
+    clear: both;
 }
 
 h2, h3, h4, h5, h6 {
     font-family: 'Roboto', sans-serif;
     text-transform: uppercase;
+    clear: both;
 }
 
 p, li, a, th {
@@ -188,6 +198,7 @@ q {
     color: var(--color-neutral);
     animation-name: text-fade-in;
     animation-duration: 4s;
+    letter-spacing: 3px;
 }
 
 #aside-container {
@@ -283,11 +294,12 @@ tr:hover {
     vertical-align: middle;
     width: 100%;
     transition-duration: 0.5s;
-    transition-property: all;
+    transition-property: transform;
     transition-timing-function: ease-in-out;
 }
 
 .column > img:hover {
+    z-index: 5;
     transform: scale(1.5);
 }
 
@@ -315,6 +327,22 @@ img[title="Ranglétra"] {
     gap: 10px;
 }
 
+tr {
+    counter-increment: sorok;
+    opacity: 0;
+    animation: block-fade-in 1s linear forwards;
+}
+
+tr:nth-child(2) { animation-delay: 1s; }
+tr:nth-child(3) { animation-delay: 2s; }
+tr:nth-child(4) { animation-delay: 3s; }
+tr:nth-child(5) { animation-delay: 4s; }
+tr:nth-child(6) { animation-delay: 5s; }
+tr:nth-child(7) { animation-delay: 6s; }
+tr:nth-child(8) { animation-delay: 7s; }
+tr:nth-child(9) { animation-delay: 8s; }
+tr:nth-child(10) { animation-delay: 9s; }
+
 /* Animációk */
 
 @keyframes text-fade-in {
@@ -335,6 +363,15 @@ img[title="Ranglétra"] {
     }
 }
 
+@keyframes block-fade-in {
+    0% {
+        opacity: 0;
+    }
+    100% {
+        opacity: 1;
+    }
+}
+
 /* Media queryk */
 @media screen and (max-width: 800px) {
     .column {
@@ -351,5 +388,34 @@ img[title="Ranglétra"] {
         margin-left: auto;
         margin-right: auto;
         max-width: 100%;
+    }
+
+    .image-right {
+        float: none;
+        display: block;
+        margin: 0 auto;
+    }
+}
+
+/* nyomtatás */
+
+@media print {
+    * {
+        animation: unset;
+    }
+    nav, audio, form {
+        display: none;
+    }
+    h1,h2,h3,h4,h5,h6 {
+        text-align: center;
+    }
+    .video-container>video {
+        display: none;
+    }
+    .video-container>.text-highlight {
+        position: unset;
+    }
+    tr {
+        opacity: 1;
     }
 }
