@@ -10,6 +10,10 @@
     --nav-height: 100px;
 }
 
+:root:has(.dark) {
+    /* TODO: darkmode */
+}
+
 /* Formázások */
 
 body {
@@ -86,18 +90,25 @@ main {
 h1 {
     text-align: center;
     text-transform: capitalize;
-    font-family: 'Roboto', sans-serif;
+    font-family: "Roboto", sans-serif;
     clear: both;
 }
 
-h2, h3, h4, h5, h6 {
-    font-family: 'Roboto', sans-serif;
+h2,
+h3,
+h4,
+h5,
+h6 {
+    font-family: "Roboto", sans-serif;
     text-transform: uppercase;
     clear: both;
 }
 
-p, li, a, th {
-    font-family: 'Roboto', sans-serif;
+p,
+li,
+a,
+th {
+    font-family: "Roboto", sans-serif;
     line-height: 1.4em;
 }
 
@@ -111,12 +122,14 @@ p::first-line {
 }
 
 caption {
-    font-family: 'Roboto', sans-serif;
+    font-family: "Roboto", sans-serif;
     font-style: italic;
 }
 
-label, legend, td {
-    font-family: 'Roboto', sans-serif;
+label,
+legend,
+td {
+    font-family: "Roboto", sans-serif;
     font-size: 0.9em;
 }
 
@@ -273,7 +286,7 @@ footer {
 }
 
 footer {
-    font-family: 'Roboto', sans-serif;
+    font-family: "Roboto", sans-serif;
     font-size: 1.2em;
 }
 
@@ -348,21 +361,43 @@ tr {
     animation: block-fade-in 1s linear forwards;
 }
 
-tr:nth-child(2) { animation-delay: 1s; }
-tr:nth-child(3) { animation-delay: 2s; }
-tr:nth-child(4) { animation-delay: 3s; }
-tr:nth-child(5) { animation-delay: 4s; }
-tr:nth-child(6) { animation-delay: 5s; }
-tr:nth-child(7) { animation-delay: 6s; }
-tr:nth-child(8) { animation-delay: 7s; }
-tr:nth-child(9) { animation-delay: 8s; }
-tr:nth-child(10) { animation-delay: 9s; }
+tr:nth-child(2) {
+    animation-delay: 1s;
+}
+tr:nth-child(3) {
+    animation-delay: 2s;
+}
+tr:nth-child(4) {
+    animation-delay: 3s;
+}
+tr:nth-child(5) {
+    animation-delay: 4s;
+}
+tr:nth-child(6) {
+    animation-delay: 5s;
+}
+tr:nth-child(7) {
+    animation-delay: 6s;
+}
+tr:nth-child(8) {
+    animation-delay: 7s;
+}
+tr:nth-child(9) {
+    animation-delay: 8s;
+}
+tr:nth-child(10) {
+    animation-delay: 9s;
+}
 
 /* Animációk */
 
 @keyframes text-fade-in {
-    from {color: transparent;}
-    to {color: var(--color-neutral);}
+    from {
+        color: transparent;
+    }
+    to {
+        color: var(--color-neutral);
+    }
 }
 
 @keyframes fade-in-and-scale {
@@ -400,8 +435,8 @@ tr:nth-child(10) { animation-delay: 9s; }
 /* Media queryk */
 @media screen and (max-width: 800px) {
     .column {
-      flex: 100%;
-      max-width: 100%;
+        flex: 100%;
+        max-width: 100%;
     }
 
     #aside-container {
@@ -429,12 +464,19 @@ tr:nth-child(10) { animation-delay: 9s; }
         animation: unset;
     }
     footer::before {
-        content: 'Nyomtatási kép!';
+        content: "Nyomtatási kép!";
     }
-    nav, audio, form {
+    nav,
+    audio,
+    form {
         display: none;
     }
-    h1,h2,h3,h4,h5,h6 {
+    h1,
+    h2,
+    h3,
+    h4,
+    h5,
+    h6 {
         text-align: center;
     }
     #aside-container {
@@ -445,10 +487,10 @@ tr:nth-child(10) { animation-delay: 9s; }
     aside {
         max-width: 100%;
     }
-    .video-container>video {
+    .video-container > video {
         display: none;
     }
-    .video-container>.text-highlight {
+    .video-container > .text-highlight {
         position: unset;
     }
     tr {

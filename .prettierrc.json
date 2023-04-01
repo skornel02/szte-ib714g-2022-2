@@ -1,4 +1,13 @@
 {
     "tabWidth": 4,
-    "endOfLine": "lf"
+    "endOfLine": "lf",
+    "plugins": ["@prettier/plugin-php"],
+    "overrides": [
+        {
+            "files": "*.php",
+            "options": {
+                "braceStyle": "1tbs"
+            }
+        }
+    ]
 }

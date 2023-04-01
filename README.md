@@ -116,11 +116,11 @@
     - [x] Súlyos hibák
         - [x] Gyakorlatvezető ítéli meg...
 2. Általános szempontok (max: 25 pont)
-    - [ ] Menü - 8 pont
-        - [ ] Használható menü, minden oldalon megjelenik (0/1 pont).
-        - [ ] Aktuális menüpont kiemelés (0/1 pont).
-        - [ ] Interaktív menü (kurzorrávitellel változik) (0/1 pont).
-        - [ ] Menü mindig látszik (0/1 pont).
+    - [ ] Menü - 4 pont
+        - [x] Használható menü, minden oldalon megjelenik (0/1 pont).
+        - [x] Aktuális menüpont kiemelés (0/1 pont).
+        - [x] Interaktív menü (kurzorrávitellel változik) (0/1 pont).
+        - [x] Menü mindig látszik (0/1 pont).
     - [ ] Felhasználói élmény - 17 pont
         - [ ] Logikus felépítés, egyértelmű, hogy mit/hogyan lehet csinálni. (0/1/3 pont).
         - [ ] Jó olvashatóság (0/1/3 pont).

@@ -14,33 +14,17 @@
 </head>
 
 <body>
-    <nav id="top">
-        <ul>
-            <li>
-                <a href="index.html">Bevezető</a>
-            </li>
-            <li>
-                <a href="#top" class="active">Hol jár a pápa?</a>
-            </li>
-            <li>
-                <a href="leaderboard.html">Ranglétra</a>
-            </li>
-            <li>
-                <a href="login.html">Bejelentkezés</a>
-            </li>
-            <li>
-                <a href="settings.html">Beállítások</a>
-            </li>
-        </ul>
-    </nav>
+    <?php require "navbar.hidden.php"; ?>
 
     <main>
         <h1>Pápa találat jelentése</h1>
         <div class="image center-image fade-and-scale">
-            <img src="./assets/img/pope-finder.png" alt="Egy térképen fekve piros iránymutató látható." title="Találat jelentés" class="image-fluid image-fade-in round-image" />
+            <img src="./assets/img/pope-finder.png" alt="Egy térképen fekve piros iránymutató látható."
+                title="Találat jelentés" class="image-fluid image-fade-in round-image" />
         </div>
         <p>
-            Segíts felderíteni a Pápa helyzetét! Ha szemtanúja voltál, esetleg ráutoló nyomot találtál Őszentsége tartózkodási helyére, ne habozz, töltsd ki az alábbi űrlapot!
+            Segíts felderíteni a Pápa helyzetét! Ha szemtanúja voltál, esetleg ráutoló nyomot találtál Őszentsége
+            tartózkodási helyére, ne habozz, töltsd ki az alábbi űrlapot!
         </p>
         <h2>Jelentés</h2>
         <form action="POST">
@@ -107,19 +91,17 @@
                 <legend>Irányítás</legend>
                 <button type="reset">
                     Alapállapot
-                    </button>
-                    
+                </button>
+
                 <button type="submit">
                     Jelentés elküldése
-                    </button>
+                </button>
 
             </fieldset>
         </form>
     </main>
-
-    <footer>&copy;2023 - Pápafinder</footer>
-
-    <script src="scripts/title-fixer.js"></script>
+        
+    <?php include "./footer.hidden.php"; ?>
 </body>
 
 </html>

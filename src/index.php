@@ -14,25 +14,7 @@
     </head>
 
     <body>
-        <nav id="top">
-            <ul>
-                <li>
-                    <a href="#top" class="active">Bevezető</a>
-                </li>
-                <li>
-                    <a href="finder.html">Hol jár a pápa?</a>
-                </li>
-                <li>
-                    <a href="leaderboard.html">Ranglétra</a>
-                </li>
-                <li>
-                    <a href="login.html">Bejelentkezés</a>
-                </li>
-                <li>
-                    <a href="settings.html">Beállítások</a>
-                </li>
-            </ul>
-        </nav>
+        <?php require "navbar.hidden.php"; ?>
 
         <div id="hero">
             <div class="video-container">
@@ -179,8 +161,6 @@
             </article>
         </main>
 
-        <footer>&copy;2023 - Pápafinder</footer>
-
-        <script src="scripts/title-fixer.js"></script>
+        <?php include "./footer.hidden.php"; ?>
     </body>
 </html>

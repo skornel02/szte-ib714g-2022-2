@@ -1,0 +1,21 @@
+<IfModule mod_headers.c>
+  Header set Cache-Control "no-cache, no-store, must-revalidate"
+  Header set Pragma "no-cache"
+  Header set Expires 0
+</IfModule>
+
+<IfModule mod_rewrite.c>
+  RewriteEngine On
+  RewriteRule ^index\.php$ - [L]
+
+  RewriteCond %{REQUEST_FILENAME} !-d
+  RewriteCond %{REQUEST_FILENAME}\.php -f
+  RewriteRule ^(.+)$ $1.php [L]
+
+</IfModule>
+
+<Files ~ "^.*\.hidden\.php$">
+  Order allow,deny
+  Deny from all
+  Satisfy all
+</Files>

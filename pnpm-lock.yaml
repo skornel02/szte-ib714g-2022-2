@@ -4,7 +4,7 @@ specifiers:
     "@prettier/plugin-php": ^0.19.3
     prettier: ^2.8.4
 
-dependencies:
+devDependencies:
     "@prettier/plugin-php": 0.19.3_prettier@2.8.4
     prettier: 2.8.4
 
@@ -21,14 +21,14 @@ packages:
             mem: 8.1.1
             php-parser: 3.1.3
             prettier: 2.8.4
-        dev: false
+        dev: true
 
     /linguist-languages/7.21.0:
         resolution:
             {
                 integrity: sha512-KrWJJbFOvlDhjlt5OhUipVlXg+plUfRurICAyij1ZVxQcqPt/zeReb9KiUVdGUwwhS/2KS9h3TbyfYLA5MDlxQ==,
             }
-        dev: false
+        dev: true
 
     /map-age-cleaner/0.1.3:
         resolution:
@@ -38,7 +38,7 @@ packages:
         engines: { node: ">=6" }
         dependencies:
             p-defer: 1.0.0
-        dev: false
+        dev: true
 
     /mem/8.1.1:
         resolution:
@@ -49,7 +49,7 @@ packages:
         dependencies:
             map-age-cleaner: 0.1.3
             mimic-fn: 3.1.0
-        dev: false
+        dev: true
 
     /mimic-fn/3.1.0:
         resolution:
@@ -57,7 +57,7 @@ packages:
                 integrity: sha512-Ysbi9uYW9hFyfrThdDEQuykN4Ey6BuwPD2kpI5ES/nFTDn/98yxYNLZJcgUAKPT/mcrLLKaGzJR9YVxJrIdASQ==,
             }
         engines: { node: ">=8" }
-        dev: false
+        dev: true
 
     /p-defer/1.0.0:
         resolution:
@@ -65,14 +65,14 @@ packages:
                 integrity: sha512-wB3wfAxZpk2AzOfUMJNL+d36xothRSyj8EXOa4f6GMqYDN9BJaaSISbsk+wS9abmnebVw95C2Kb5t85UmpCxuw==,
             }
         engines: { node: ">=4" }
-        dev: false
+        dev: true
 
     /php-parser/3.1.3:
         resolution:
             {
                 integrity: sha512-hPvBmnRYPqWEtMfIFOlyjQv1q75UUtxt4U+YscKIQViGmEE2Xa4BuS1B1/cZdjy7MVcwtnr0WkEsr915LgRKOw==,
             }
-        dev: false
+        dev: true
 
     /prettier/2.8.4:
         resolution:
@@ -81,4 +81,4 @@ packages:
             }
         engines: { node: ">=10.13.0" }
         hasBin: true
-        dev: false
+        dev: true
