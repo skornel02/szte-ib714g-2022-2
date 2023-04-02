@@ -1,16 +1,27 @@
+<?php
+require_once "session.hidden.php";
+require_once "classes.hidden.php";
+require_once "database.hidden.php";
+
+$users = Database::get_instance()->get_users();
+?>
+
 <!DOCTYPE html>
 <html lang="hu">
 
 <head>
-    <meta charset="UTF-8" />
-    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
-    <meta name="author" content="Horváth Gergely Zsolt" />
-    <meta name="author" content="Stefán Kornél" />
-    <meta name="generator" content="Embergép" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <link rel="stylesheet" href="styles/global.css" />
-    <link rel="icon" href="./assets/img/favicon.ico" type="image/x-icon">
+    <?php require "meta.hidden.php"; ?>
     <title>Rangsor</title>
+    <style>
+        <?php for ($i = 1; $i <= count($users); $i++) {
+            echo "tr:nth-child(" .
+                $i +
+                1 .
+                ") { animation-delay: " .
+                ($i - 1) .
+                "s; }\n";
+        } ?>
+    </style>
 </head>
 
 <body>
@@ -32,35 +43,28 @@
                 <th>Bejelentő neve</th>
                 <th>Bejelentések száma</th>
             </tr>
-            <tr>
-                <td>1</td>
-                <td>Jesus</td>
-                <td>100</td>
-            </tr>
-            <tr>
-                <td>2</td>
-                <td>Popey Mc PopeFace</td>
-                <td>69</td>
-            </tr>
-            <tr>
-                <td>3</td>
-                <td>Credo in Deum Patrem omnipotentem</td>
-                <td>66</td>
-            </tr>
-            <tr>
-                <td>4</td>
-                <td>The All-Seeing Father</td>
-                <td>42</td>
-            </tr>
-            <tr>
-                <td>5</td>
-                <td>Béla</td>
-                <td>24</td>
-            </tr>
+            <?php foreach ($users as $index => $user): ?>
+
+                <tr>
+                    <td>
+                        <?= $index + 1 ?>
+                    </td>
+                    <td>
+                        <a href="profile?user=<?= $user->get_name() ?>">
+                            <?= $user->get_name() ?>
+                        </a>
+                    </td>
+                    <td>
+                        <?= rand(3, 42690) ?>
+                    </td>
+                </tr>
+
+
+            <?php endforeach; ?>
         </table>
 
     </main>
-        
+
     <?php include "./footer.hidden.php"; ?>
 </body>
 

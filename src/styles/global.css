@@ -147,6 +147,11 @@ a {
     min-width: 320px;
 }
 
+.image.pfp {
+    min-width: unset;
+    max-width: 160px;
+}
+
 .center-image {
     display: block;
     margin-left: auto;
@@ -361,32 +366,25 @@ tr {
     animation: block-fade-in 1s linear forwards;
 }
 
-tr:nth-child(2) {
-    animation-delay: 1s;
+#successToaster {
+    position: absolute;
+    top: 80px;
+    left: 50vw;
+    transform: translateX(-50%);
+    background-color: lightgreen;
+    font-size: x-large;
+    padding: 5px 10px;
+    z-index: 100;
+    transition: opacity 3s;
+    animation: fade-in-and-scale 1s;
 }
-tr:nth-child(3) {
-    animation-delay: 2s;
+
+#successToaster.hidden {
+    opacity: 0;
 }
-tr:nth-child(4) {
-    animation-delay: 3s;
-}
-tr:nth-child(5) {
-    animation-delay: 4s;
-}
-tr:nth-child(6) {
-    animation-delay: 5s;
-}
-tr:nth-child(7) {
-    animation-delay: 6s;
-}
-tr:nth-child(8) {
-    animation-delay: 7s;
-}
-tr:nth-child(9) {
-    animation-delay: 8s;
-}
-tr:nth-child(10) {
-    animation-delay: 9s;
+
+#successToaster:empty {
+    display: none;
 }
 
 /* Animációk */

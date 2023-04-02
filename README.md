@@ -116,7 +116,7 @@
     - [x] Súlyos hibák
         - [x] Gyakorlatvezető ítéli meg...
 2. Általános szempontok (max: 25 pont)
-    - [ ] Menü - 4 pont
+    - [x] Menü - 4 pont
         - [x] Használható menü, minden oldalon megjelenik (0/1 pont).
         - [x] Aktuális menüpont kiemelés (0/1 pont).
         - [x] Interaktív menü (kurzorrávitellel változik) (0/1 pont).
@@ -132,22 +132,22 @@
         - [ ] Objektumorientáltság megfelelő használata (0/2/4 pont).
         - [ ] Sütik értelmes módon való használata (0/3 pont).
 3. Megvalósított funkciók (max: 65 pont)
-    - [ ] Regisztráció - 13 pont
-        - [ ] Van működő regisztráció, regisztráció során az adatok eltárolódnak (0/2 pont).
-        - [ ] Kötelező mezők kitöltése szerveroldalon is ellenőrizve van (0/2 pont).
-        - [ ] Foglalt felhasználónév hiba (0/2 pont).
-        - [ ] Két alkalommal kell beírni a jelszót, és ezek azonosak (0/2 pont).
-        - [ ] Nem kitöltött mező, vagy rosszul kitöltött mező jelzése egyértelműen (az összes hibát) (0/2 pont).
-        - [ ] Biztonságos jelszótárolás (nem plain text) (0/3 pont).
+    - [x] Regisztráció - 13 pont
+        - [x] Van működő regisztráció, regisztráció során az adatok eltárolódnak (0/2 pont).
+        - [x] Kötelező mezők kitöltése szerveroldalon is ellenőrizve van (0/2 pont).
+        - [x] Foglalt felhasználónév hiba (0/2 pont).
+        - [x] Két alkalommal kell beírni a jelszót, és ezek azonosak (0/2 pont).
+        - [x] Nem kitöltött mező, vagy rosszul kitöltött mező jelzése egyértelműen (az összes hibát) (0/2 pont).
+        - [x] Biztonságos jelszótárolás (nem plain text) (0/3 pont).
     - [ ] Bejelentkezés szabályos session kezeléssel - 10 pont
-        - [ ] Van lehetőség az oldalra való bejelentkezésre (0/2 pont).
-        - [ ] Hibás bejelentkezés kezelése (0/2 pont).
+        - [x] Van lehetőség az oldalra való bejelentkezésre (0/2 pont).
+        - [x] Hibás bejelentkezés kezelése (0/2 pont).
         - [ ] A bejelentkezett felhasználó elér olyan értelmes oldalakat amit a nem bejelentkezett nem (0/2 pont).
         - [ ] A csak bejelentkezéssel elérhető oldalak nem bejelentkezve átírányítanak (0/2 pont).
-        - [ ] Működő kijelentkezés (0/2 pont).
+        - [x] Működő kijelentkezés (0/2 pont).
     - [ ] Bejelentkezéshez kötött funkciók - 52 pont[^1]
-        - [ ] "Profil" módosítás (0/2/4 pont).
-        - [ ] Profilkép beállítás (0/2/4 pont).
+        - [x] "Profil" módosítás (0/2/4 pont).
+        - [x] Profilkép beállítás (0/2/4 pont).
         - [ ] Fiók törlése (0/4 pont).
         - [ ] Más felhasználók fiókjának megtektinése (publikus adatok elérése), saját adataink publikálása (0/4/8 pont).
         - [ ] Olyan interakciók amik ki- és bejelentkezés után is megmaradnak (értékelés, poszt, barátok, termékek a kosárban) (0/4/8 pont).

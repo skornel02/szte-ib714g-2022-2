@@ -1,6 +1,8 @@
 <?php
 require_once "session.hidden.php";
 
+$success = $_GET["success"] ?? null;
+
 function create_attributes_for_link($path) {
     $href = $path;
     $class = "";
@@ -16,9 +18,9 @@ function create_attributes_for_link($path) {
     return "href=\"$href\" class=\"$class\"";
 }
 function create_link_for_login() {
-    $logged_in = is_logged_in();
+    $logged_in = SessionManager::is_logged_in();
     $attributes = $logged_in
-        ? "href=\"logout.php\""
+        ? create_attributes_for_link("logout")
         : create_attributes_for_link("login");
     $name = $logged_in ? "Kijelentkezés" : "Bejelentkezés";
 
@@ -34,7 +36,7 @@ function create_hidden_attribute($should_be_hidden) {
     <ul>
         <li>
             <a <?= create_attributes_for_link(".") ?>>Bevezető</a>
-        </li>        
+        </li>
         <li>
             <a <?= create_attributes_for_link("finder") ?>>Hol jár a pápa?</a>
         </li>
@@ -42,8 +44,19 @@ function create_hidden_attribute($should_be_hidden) {
             <a <?= create_attributes_for_link("leaderboard") ?>>Ranglétra</a>
         </li>
         <?= create_link_for_login() ?>
-        <li <?= create_hidden_attribute(!is_logged_in()) ?>>
+        <li <?= create_hidden_attribute(!SessionManager::is_logged_in()) ?>>
             <a <?= create_attributes_for_link("settings") ?>>Beállítások</a>
         </li>
     </ul>
+    <?= "<div id=\"successToaster\" onclick=\"disappearToaster();\">$success</div>" ?>
 </nav>
+
+<script>
+    setTimeout(() => {
+        disappearToaster();
+    }, 5000);
+    
+    function disappearToaster() {
+        document.getElementById("successToaster").classList.add("hidden");
+    }
+</script>
