@@ -366,24 +366,36 @@ tr {
     animation: block-fade-in 1s linear forwards;
 }
 
-#successToaster {
+.toast-container {
     position: absolute;
     top: 80px;
     left: 50vw;
     transform: translateX(-50%);
-    background-color: lightgreen;
     font-size: x-large;
     padding: 5px 10px;
     z-index: 100;
+    display: flex;
+    flex-direction: column;
+}
+
+.toast {
     transition: opacity 3s;
     animation: fade-in-and-scale 1s;
 }
 
-#successToaster.hidden {
+#success-toaster {
+    background-color: lightgreen;
+}
+
+#error-toaster {
+    background-color: red;
+}
+
+.toast.hidden {
     opacity: 0;
 }
 
-#successToaster:empty {
+.toast:empty {
     display: none;
 }
 

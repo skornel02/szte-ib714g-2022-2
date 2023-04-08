@@ -1,13 +1,18 @@
+<?php
+spl_autoload_register(function ($class_name) {
+    require "classes/" . $class_name . ".hidden.php";
+}); ?>
+
 <!DOCTYPE html>
 <html lang="hu">
     <head>
-        <?php require "meta.hidden.php"; ?>
+        <?php require "templates/meta.hidden.php"; ?>
         <link rel="stylesheet" href="styles/index.css" />
         <title>Főoldal</title>
     </head>
 
     <body>
-        <?php require "navbar.hidden.php"; ?>
+        <?php require "templates/navbar.hidden.php"; ?>
 
         <div id="hero">
             <div class="video-container">
@@ -154,6 +159,6 @@
             </article>
         </main>
 
-        <?php include "./footer.hidden.php"; ?>
+        <?php include "templates/footer.hidden.php"; ?>
     </body>
 </html>

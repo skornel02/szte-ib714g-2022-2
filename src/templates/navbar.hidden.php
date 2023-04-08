@@ -1,7 +1,6 @@
 <?php
-require_once "session.hidden.php";
-
 $success = $_GET["success"] ?? null;
+$error = $_GET["error"] ?? null;
 
 function create_attributes_for_link($path) {
     $href = $path;
@@ -45,18 +44,32 @@ function create_hidden_attribute($should_be_hidden) {
         </li>
         <?= create_link_for_login() ?>
         <li <?= create_hidden_attribute(!SessionManager::is_logged_in()) ?>>
-            <a <?= create_attributes_for_link("settings") ?>>Beállítások</a>
+            <a <?= create_attributes_for_link(
+                "profile?user=" .
+                    (SessionManager::is_logged_in()
+                        ? SessionManager::get_session()->get_name()
+                        : "")
+            ) ?>
+            >profilom</a>
         </li>
     </ul>
-    <?= "<div id=\"successToaster\" onclick=\"disappearToaster();\">$success</div>" ?>
+    <div class="toast-container">
+        <?= "<div id=\"success-toaster\" class=\"toast\" onclick=\"disappearSuccessToaster();\">$success</div>" ?>
+        <?= "<div id=\"error-toaster\" class=\"toast\" onclick=\"disappearErrorToaster();\">$error</div>" ?>
+    </div>
 </nav>
 
 <script>
     setTimeout(() => {
-        disappearToaster();
+        disappearSuccessToaster();
+        disappearErrorToaster();
     }, 5000);
     
-    function disappearToaster() {
-        document.getElementById("successToaster").classList.add("hidden");
+    function disappearSuccessToaster() {
+        document.getElementById("success-toaster").classList.add("hidden");
+    }
+
+    function disappearErrorToaster() {
+        document.getElementById("error-toaster").classList.add("hidden");
     }
 </script>

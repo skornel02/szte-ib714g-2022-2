@@ -1,5 +1,7 @@
 <?php
-require_once "session.hidden.php";
+spl_autoload_register(function ($class_name) {
+    require "classes/" . $class_name . ".hidden.php";
+});
 
 SessionManager::end_session();
 ?>
@@ -7,13 +9,13 @@ SessionManager::end_session();
 <!DOCTYPE html>
 <html lang="hu">
     <head>
-        <?php require "meta.hidden.php"; ?>
+        <?php require "templates/meta.hidden.php"; ?>
         <link rel="icon" href="./assets/img/favicon.ico" type="image/x-icon">
         <title>Főoldal</title>
     </head>
 
     <body>
-        <?php require "navbar.hidden.php"; ?>
+        <?php require "templates/navbar.hidden.php"; ?>
 
         <div id="hero">
             <div class="video-container">
@@ -32,6 +34,6 @@ SessionManager::end_session();
             }, 3000);
         </script>
 
-        <?php include "./footer.hidden.php"; ?>
+        <?php include "templates/footer.hidden.php"; ?>
     </body>
 </html>

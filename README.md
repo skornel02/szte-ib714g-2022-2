@@ -139,17 +139,17 @@
         - [x] Két alkalommal kell beírni a jelszót, és ezek azonosak (0/2 pont).
         - [x] Nem kitöltött mező, vagy rosszul kitöltött mező jelzése egyértelműen (az összes hibát) (0/2 pont).
         - [x] Biztonságos jelszótárolás (nem plain text) (0/3 pont).
-    - [ ] Bejelentkezés szabályos session kezeléssel - 10 pont
+    - [x] Bejelentkezés szabályos session kezeléssel - 10 pont
         - [x] Van lehetőség az oldalra való bejelentkezésre (0/2 pont).
         - [x] Hibás bejelentkezés kezelése (0/2 pont).
-        - [ ] A bejelentkezett felhasználó elér olyan értelmes oldalakat amit a nem bejelentkezett nem (0/2 pont).
-        - [ ] A csak bejelentkezéssel elérhető oldalak nem bejelentkezve átírányítanak (0/2 pont).
+        - [x] A bejelentkezett felhasználó elér olyan értelmes oldalakat amit a nem bejelentkezett nem (0/2 pont).
+        - [x] A csak bejelentkezéssel elérhető oldalak nem bejelentkezve átírányítanak (0/2 pont).
         - [x] Működő kijelentkezés (0/2 pont).
-    - [ ] Bejelentkezéshez kötött funkciók - 52 pont[^1]
+    - [x] Bejelentkezéshez kötött funkciók - 52 pont[^1]
         - [x] "Profil" módosítás (0/2/4 pont).
         - [x] Profilkép beállítás (0/2/4 pont).
-        - [ ] Fiók törlése (0/4 pont).
-        - [ ] Más felhasználók fiókjának megtektinése (publikus adatok elérése), saját adataink publikálása (0/4/8 pont).
+        - [x] Fiók törlése (0/4 pont).
+        - [x] Más felhasználók fiókjának megtektinése (publikus adatok elérése), saját adataink publikálása (0/4/8 pont).
         - [ ] Olyan interakciók amik ki- és bejelentkezés után is megmaradnak (értékelés, poszt, barátok, termékek a kosárban) (0/4/8 pont).
         - [ ] Üzenetküldés a felhasználók között (0/4/8 pont).
         - [ ] Jogosultsági szintek megvalósítva (admin, felhasználók) (0/4/8 pont).

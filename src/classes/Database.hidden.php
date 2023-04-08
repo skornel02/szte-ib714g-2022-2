@@ -46,7 +46,10 @@ class Database {
             array_push($users_dump, $user->dump());
         }
 
-        file_put_contents("data/users.json", json_encode($users_dump));
+        file_put_contents(
+            "data/users.json",
+            json_encode($users_dump, JSON_PRETTY_PRINT)
+        );
     }
 
     public function add_user(User $user): void {
@@ -56,7 +59,9 @@ class Database {
     }
 
     public function get_user(string $username): User|null {
-        foreach ($this->get_users() as $user) {
+        $this->get_users();
+
+        foreach ($this->users as $user) {
             if ($user->get_name() == $username) {
                 return $user;
             }
@@ -71,6 +76,18 @@ class Database {
         for ($i = 0; $i < count($this->users); $i++) {
             if ($this->users[$i]->get_name() == $user->get_name()) {
                 $this->users[$i] = $user;
+                $this->save_users();
+                return;
+            }
+        }
+    }
+
+    public function remove_user(User $user): void {
+        $this->get_users();
+
+        for ($i = 0; $i < count($this->users); $i++) {
+            if ($this->users[$i]->get_name() == $user->get_name()) {
+                array_splice($this->users, $i, 1);
                 $this->save_users();
                 return;
             }

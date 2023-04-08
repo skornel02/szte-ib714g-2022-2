@@ -9,6 +9,8 @@ class User {
     private string $profile_picture_url;
     private int $last_logged_in;
     private string $description;
+    private bool $is_private;
+    private bool $is_admin;
 
     function __construct(
         string $name,
@@ -16,7 +18,9 @@ class User {
         string $password_hash,
         string $profile_picture_url,
         int $last_logged_in,
-        string $description
+        string $description,
+        bool $is_private,
+        bool $is_admin
     ) {
         $this->name = $name;
         $this->email = $email;
@@ -24,6 +28,8 @@ class User {
         $this->profile_picture_url = $profile_picture_url;
         $this->last_logged_in = $last_logged_in;
         $this->description = $description;
+        $this->is_private = $is_private;
+        $this->is_admin = $is_admin;
     }
 
     public static function hash_password(string $password): string {
@@ -41,7 +47,9 @@ class User {
             User::hash_password($password),
             ProfilePicture::create_url_for_user(),
             time(),
-            "-"
+            "-",
+            true,
+            false
         );
     }
 
@@ -52,7 +60,9 @@ class User {
             $dump["password_hash"],
             $dump["profile_picture_url"],
             $dump["last_logged_in"] ?? 0,
-            $dump["description"] ?? ""
+            $dump["description"] ?? "",
+            $dump["is_private"] ?? true,
+            $dump["is_admin"] ?? false
         );
     }
 
@@ -64,6 +74,8 @@ class User {
             "profile_picture_url" => $this->profile_picture_url,
             "last_logged_in" => $this->last_logged_in,
             "description" => $this->description,
+            "is_private" => $this->is_private,
+            "is_admin" => $this->is_admin,
         ];
     }
 
@@ -101,6 +113,22 @@ class User {
 
     public function set_description(string $description): void {
         $this->description = $description;
+    }
+
+    public function is_private(): bool {
+        return $this->is_private;
+    }
+
+    public function set_private(bool $is_private): void {
+        $this->is_private = $is_private;
+    }
+
+    public function is_admin(): bool {
+        return $this->is_admin;
+    }
+
+    public function set_admin(bool $is_admin): void {
+        $this->is_admin = $is_admin;
     }
 }
 

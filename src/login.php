@@ -1,7 +1,7 @@
 <?php
-require_once "session.hidden.php";
-require_once "classes.hidden.php";
-require_once "database.hidden.php";
+spl_autoload_register(function ($class_name) {
+    require "classes/" . $class_name . ".hidden.php";
+});
 
 $error_message = null;
 
@@ -16,30 +16,34 @@ if (SessionManager::is_logged_in()) {
 }
 
 if ($_SERVER["REQUEST_METHOD"] === "POST") {
+    $errors = [];
     if ($type == "login") {
-        if (($error_message = validate_login($username, $password)) == null) {
+        $errors = validate_login($username, $password);
+        if (count($errors) === 0) {
             $error_message = handle_login($username, $password);
         }
     } elseif ($type == "register") {
-        if (
-            ($error_message = validate_register(
-                $username,
-                $email,
-                $password,
-                $password2
-            )) == null
-        ) {
-            $error_message = handle_register($username, $email, $password);
+        $errors = validate_register($username, $email, $password, $password2);
+        if (count($errors) === 0) {
+            $errors = handle_register($username, $email, $password);
         }
     }
-}
+    $error_message = implode("<br> ", $errors);
 
-function validate_login(string $username, string $password): string|null {
-    if (empty($username) || empty($password)) {
-        return "Felhasználónév vagy jelszó üres!";
+    if ($error_message === "") {
+        $error_message = null;
     }
 
-    return null;
+    $_GET["error"] = $error_message;
+}
+
+function validate_login(string $username, string $password): array {
+    $errors = [];
+    if (empty($username) || empty($password)) {
+        $errors[] = "Felhasználónév vagy jelszó üres!";
+    }
+
+    return $errors;
 }
 
 function validate_register(
@@ -47,24 +51,26 @@ function validate_register(
     string $email,
     string $password,
     string $password2
-): string|null {
+): array {
+    $errors = [];
+
     if (empty($username) || empty($password)) {
-        return "Felhasználónév vagy jelszó üres!";
+        $errors[] = "Felhasználónév vagy jelszó üres!";
     }
     if (empty($email)) {
-        return "Email cím üres!";
+        $errors[] = "Email cím üres!";
     }
     if ($password !== $password2) {
-        return "Jelszavak nem egyeznek!";
+        $errors[] = "Jelszavak nem egyeznek!";
     }
     if (!filter_var($email, FILTER_VALIDATE_EMAIL)) {
-        return "Email nem megfelelő formátumú!";
+        $errors[] = "Email nem megfelelő formátumú!";
     }
     if (strlen($password) < 8) {
-        return "Jelszó legalább 8 karakter kell, hogy legyen!";
+        $errors[] = "Jelszó legalább 8 karakter kell, hogy legyen!";
     }
 
-    return null;
+    return $errors;
 }
 
 function handle_login(string $username, string $password): string|null {
@@ -105,27 +111,31 @@ function handle_register(
     string $username,
     string $email,
     string $password
-): string|null {
-    global $error_message;
+): array {
+    $errors = [];
 
     foreach (Database::get_instance()->get_users() as $match) {
-        if ($match->get_name() == $username) {
-            return "Már létezik ilyen felhasználó!";
+        if ($match->get_name() === $username) {
+            $errors[] = "Már létezik ilyen felhasználó!";
         }
-        if ($match->get_email() == $email) {
-            return "Már létezik ilyen email cím!";
+        if ($match->get_email() === $email) {
+            $errors[] = "Már foglalt ez az e-mail cím!";
         }
         if ($match->verify_password($password)) {
-            return "Már létezik ilyen jelszó! (Felhasználónév: '" .
+            $errors[] =
+                "Már létezik ilyen jelszó! (Felhasználónév: '" .
                 $match->get_name() .
                 "', légyszi beszélj vele, ha szeretnéd ezt a jelszót.)";
         }
     }
 
-    $user = User::create_new($username, $email, $password);
-    Database::get_instance()->add_user($user);
-    header("Location: login?success=Regisztráció sikeres!");
-    return null;
+    if (count($errors) === 0) {
+        $user = User::create_new($username, $email, $password);
+        Database::get_instance()->add_user($user);
+        header("Location: login?success=Regisztráció sikeres!");
+    }
+
+    return $errors;
 }
 ?>
 
@@ -133,12 +143,12 @@ function handle_register(
 <html lang="hu">
 
 <head>
-    <?php require "meta.hidden.php"; ?>
+    <?php require "templates/meta.hidden.php"; ?>
     <title>Bejelentkezés</title>
 </head>
 
 <body>
-    <?php require "navbar.hidden.php"; ?>
+    <?php require "templates/navbar.hidden.php"; ?>
 
     <main>
         <section id="login">
@@ -220,7 +230,7 @@ function handle_register(
         toggleLogin();
     </script>
 
-    <?php include "./footer.hidden.php"; ?>
+    <?php include "templates/footer.hidden.php"; ?>
 </body>
 
 </html>

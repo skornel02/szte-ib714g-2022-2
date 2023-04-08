@@ -1,7 +1,8 @@
 <?php
 
-require_once "classes.hidden.php";
-require_once "database.hidden.php";
+spl_autoload_register(function ($class_name) {
+    include $class_name . ".hidden.php";
+});
 
 class SessionManager {
     private static function start_session(): void {
@@ -52,6 +53,12 @@ class SessionManager {
         return Database::get_instance()->get_user(
             SessionManager::get_property("user")
         );
+    }
+
+    public static function is_admin(): bool {
+        $session = SessionManager::get_session();
+
+        return $session != null && $session->is_admin();
     }
 }
 

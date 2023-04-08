@@ -1,7 +1,7 @@
 <?php
-require_once "session.hidden.php";
-require_once "classes.hidden.php";
-require_once "database.hidden.php";
+spl_autoload_register(function ($class_name) {
+    require "classes/" . $class_name . ".hidden.php";
+});
 
 $users = Database::get_instance()->get_users();
 ?>
@@ -10,7 +10,7 @@ $users = Database::get_instance()->get_users();
 <html lang="hu">
 
 <head>
-    <?php require "meta.hidden.php"; ?>
+    <?php require "templates/meta.hidden.php"; ?>
     <title>Rangsor</title>
     <style>
         <?php for ($i = 1; $i <= count($users); $i++) {
@@ -25,7 +25,7 @@ $users = Database::get_instance()->get_users();
 </head>
 
 <body>
-    <?php require "navbar.hidden.php"; ?>
+    <?php require "templates/navbar.hidden.php"; ?>
 
     <main>
         <h1>Ranglétra</h1>
@@ -45,13 +45,19 @@ $users = Database::get_instance()->get_users();
             </tr>
             <?php foreach ($users as $index => $user): ?>
 
-                <tr>
+                <tr id="tr<?= $index ?>">
                     <td>
                         <?= $index + 1 ?>
                     </td>
                     <td>
-                        <a href="profile?user=<?= $user->get_name() ?>">
-                            <?= $user->get_name() ?>
+                        <a href="<?= $user->is_private() &&
+                        !SessionManager::is_admin()
+                            ? "#tr$index"
+                            : "profile?user=" . $user->get_name() ?>">
+                            <?= $user->is_private() &&
+                            !SessionManager::is_admin()
+                                ? "[PRIVATE]"
+                                : $user->get_name() ?>
                         </a>
                     </td>
                     <td>
@@ -65,7 +71,7 @@ $users = Database::get_instance()->get_users();
 
     </main>
 
-    <?php include "./footer.hidden.php"; ?>
+    <?php include "templates/footer.hidden.php"; ?>
 </body>
 
 </html>
