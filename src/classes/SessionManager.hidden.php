@@ -24,16 +24,10 @@ class SessionManager {
         return key_exists("logged_in", $_SESSION) && $_SESSION["logged_in"];
     }
 
-    public static function get_property(string $key): string|null {
+    private static function get_property(string $key): string|null {
         SessionManager::start_session();
 
         return key_exists($key, $_SESSION) ? $_SESSION[$key] : null;
-    }
-
-    public static function set_property(string $key, string $value): void {
-        SessionManager::start_session();
-
-        $_SESSION[$key] = $value;
     }
 
     public static function login(User $user): void {

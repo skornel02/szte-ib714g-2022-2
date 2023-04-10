@@ -8,7 +8,7 @@
 
     -   határidő: 2023. március 5. 23:59:00
 
--   [ ] 2. mérföldkő:
+-   [x] 2. mérföldkő:
 
     -   beadási határidő: 2023. március 19. 23:59:00 2023.
 
@@ -150,9 +150,9 @@
         - [x] Profilkép beállítás (0/2/4 pont).
         - [x] Fiók törlése (0/4 pont).
         - [x] Más felhasználók fiókjának megtektinése (publikus adatok elérése), saját adataink publikálása (0/4/8 pont).
-        - [ ] Olyan interakciók amik ki- és bejelentkezés után is megmaradnak (értékelés, poszt, barátok, termékek a kosárban) (0/4/8 pont).
+        - [x] Olyan interakciók amik ki- és bejelentkezés után is megmaradnak (értékelés, poszt, barátok, termékek a kosárban) (0/4/8 pont).
         - [ ] Üzenetküldés a felhasználók között (0/4/8 pont).
-        - [ ] Jogosultsági szintek megvalósítva (admin, felhasználók) (0/4/8 pont).
-        - [ ] Egyéb funkciók (0/4/8 pont).
+        - [x] Jogosultsági szintek megvalósítva (admin, felhasználók) (0/4/8 pont).
+        - [x] Egyéb funkciók (0/4/8 pont).
 
 [^1]: A pontok csak igényesen megvalósított funkciók esetén járnak.

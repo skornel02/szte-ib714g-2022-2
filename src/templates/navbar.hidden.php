@@ -42,7 +42,6 @@ function create_hidden_attribute($should_be_hidden) {
         <li>
             <a <?= create_attributes_for_link("leaderboard") ?>>Ranglétra</a>
         </li>
-        <?= create_link_for_login() ?>
         <li <?= create_hidden_attribute(!SessionManager::is_logged_in()) ?>>
             <a <?= create_attributes_for_link(
                 "profile?user=" .
@@ -52,6 +51,10 @@ function create_hidden_attribute($should_be_hidden) {
             ) ?>
             >profilom</a>
         </li>
+        <li <?= create_hidden_attribute(!SessionManager::is_admin()) ?>>
+            <a <?= create_attributes_for_link("admin") ?>>Admin</a>
+        </li>
+        <?= create_link_for_login() ?>
     </ul>
     <div class="toast-container">
         <?= "<div id=\"success-toaster\" class=\"toast\" onclick=\"disappearSuccessToaster();\">$success</div>" ?>

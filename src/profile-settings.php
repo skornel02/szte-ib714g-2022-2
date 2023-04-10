@@ -14,7 +14,11 @@ $remove_error = $_GET["remove-error"] ?? null;
 $vis_error = $_GET["vis-error"] ?? null;
 
 $_GET["error"] =
-    $pfp_error ?? ($description_error ?? ($remove_error ?? $vis_error ??  (key_exists("error", $_GET) ? $_GET["error"] : null)));
+    $pfp_error ??
+    ($description_error ??
+        ($remove_error ??
+            ($vis_error ??
+                (key_exists("error", $_GET) ? $_GET["error"] : null))));
 
 /**
  * @var User
@@ -39,7 +43,7 @@ $session = SessionManager::get_session() ?? die("Session error");
         <form action="settings-process" method="post" enctype="multipart/form-data">
             <fieldset>
                 <legend>Profilkép (publikus)</legend>
-                <img src="pfp/<?= SessionManager::get_session()->get_profile_picture_url() ?>" alt="profilkép"
+                <img src="<?= SessionManager::get_session()->get_profile_picture_url() ?>" alt="profilkép"
                     title="Avatar" class="image pfp center-image image-fluid round-image fade-and-scale">
                 <label>
                     Profilkép megváltoztatása
@@ -49,7 +53,7 @@ $session = SessionManager::get_session() ?? die("Session error");
                     echo $pfp_error;
                 } ?> <!-- TODO: make this pretty please -->
                 <input type="hidden" name="action" value="<?= ProfileAction
-                ::UpdateProfilePicture->name ?>">
+                    ::UpdateProfilePicture->name ?>">
                 <button type="submit">
                     Feltöltés
                 </button>
@@ -67,7 +71,7 @@ $session = SessionManager::get_session() ?? die("Session error");
                     echo $description_error;
                 } ?> <!-- TODO: make this pretty please -->
                 <input type="hidden" name="action" value="<?= ProfileAction
-                ::UpdateDescription->name ?>">
+                    ::UpdateDescription->name ?>">
                 <button type="submit">
                     Mentés
                 </button>
@@ -78,10 +82,12 @@ $session = SessionManager::get_session() ?? die("Session error");
                 <legend>Fiók láthatóság</legend>
                 <label>
                     Látható mindenki által
-                    <input type="checkbox" name="visible" <?= $session->is_private() ? "" : "checked" ?>>
+                    <input type="checkbox" name="visible" <?= $session->is_private()
+                        ? ""
+                        : "checked" ?>>
                 </label>
                 <input type="hidden" name="action" value="<?= ProfileAction
-                ::UpdateVisibility->name ?>">
+                    ::UpdateVisibility->name ?>">
                 <button type="submit">
                     Mentés
                 </button>
@@ -98,7 +104,7 @@ $session = SessionManager::get_session() ?? die("Session error");
                     echo $remove_error;
                 } ?> <!-- TODO: make this pretty please -->
                 <input type="hidden" name="action" value="<?= ProfileAction
-                ::DeleteProfile->name ?>">
+                    ::DeleteProfile->name ?>">
                 <button type="submit">
                     Mentés
                 </button>

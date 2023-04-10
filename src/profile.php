@@ -5,6 +5,7 @@ spl_autoload_register(function ($class_name) {
 
 $username = $_GET["user"] ?? "";
 $user = Database::get_instance()->get_user($username);
+
 $is_self =
     SessionManager::is_logged_in() &&
     $user !== null &&
@@ -35,8 +36,8 @@ if (
         </h1>
         <?= $user->is_admin() ? "<h2>ADMIN</h2>" : "" ?>
         <?= $user->is_private() ? "<h2>Privát profil</h2>" : "" ?>
-        <?= $is_self ? "<a href=\"settings\">Beállítások</a>" : "" ?>
-        <img src="pfp/<?= $user->get_profile_picture_url() ?>" alt="profilkép" title="Avatar"
+        <?= $is_self ? "<a href=\"profile-settings\">Beállítások</a>" : "" ?>
+        <img src="<?= $user->get_profile_picture_url() ?>" alt="profilkép" title="Avatar"
             class="image pfp center-image image-fluid round-image fade-and-scale">
         <p>Leírás:</p>
         <pre><?= $user->get_description() ?></pre>

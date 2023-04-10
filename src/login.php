@@ -5,8 +5,8 @@ spl_autoload_register(function ($class_name) {
 
 $error_message = null;
 
-$username = $_POST["username"] ?? "";
-$email = $_POST["email"] ?? "";
+$username = trim($_POST["username"] ?? "");
+$email = trim($_POST["email"] ?? "");
 $password = $_POST["secret"] ?? "";
 $password2 = $_POST["secret2"] ?? "";
 $type = $_POST["action"] ?? "login";
@@ -19,6 +19,7 @@ if ($_SERVER["REQUEST_METHOD"] === "POST") {
     $errors = [];
     if ($type == "login") {
         $errors = validate_login($username, $password);
+
         if (count($errors) === 0) {
             $error_message = handle_login($username, $password);
         }
@@ -28,10 +29,9 @@ if ($_SERVER["REQUEST_METHOD"] === "POST") {
             $errors = handle_register($username, $email, $password);
         }
     }
-    $error_message = implode("<br> ", $errors);
 
-    if ($error_message === "") {
-        $error_message = null;
+    if (count($errors) > 0) {
+        $error_message = implode("<br> ", $errors);
     }
 
     $_GET["error"] = $error_message;

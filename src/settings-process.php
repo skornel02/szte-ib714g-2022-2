@@ -24,12 +24,11 @@ switch ($action) {
         handle_delete_profile();
         break;
     default:
-        header("Location: settings?error=Ismeretlen profil művelet!");
+        header("Location: profile-settings?error=Ismeretlen profil művelet!");
         break;
 }
 
-function user_session_helper(User $user): User
-{
+function user_session_helper(User $user): User {
     if ($user == null) {
         header("Location: login?error=Jelentkezz be először!");
         exit();
@@ -37,8 +36,7 @@ function user_session_helper(User $user): User
     return $user;
 }
 
-function handle_profile_picture_update()
-{
+function handle_profile_picture_update() {
     $user = user_session_helper(SessionManager::get_session());
 
     $new_profile_picture = $_FILES["profile-picture"];
@@ -47,11 +45,18 @@ function handle_profile_picture_update()
         $new_profile_picture
     );
 
-    header("Location: settings?pfp-error=$pfp_error");
+    if ($pfp_error === null) {
+        header(
+            "Location: profile?user=" .
+                $user->get_name() .
+                "&success=Sikeresen frissítetted a profilképedet!"
+        );
+    } else {
+        header("Location: profile-settings?pfp-error=$pfp_error");
+    }
 }
 
-function handle_description_update()
-{
+function handle_description_update() {
     $user = user_session_helper(SessionManager::get_session());
 
     $description = $_POST["description"] ?? "";
@@ -64,11 +69,18 @@ function handle_description_update()
         Database::get_instance()->update_user($user);
     }
 
-    header("Location: settings?desc-error=$description_error");
+    if ($description_error === null) {
+        header(
+            "Location: profile?user=" .
+                $user->get_name() .
+                "&success=Sikeresen frissítetted a leírásodat!"
+        );
+    } else {
+        header("Location: profile-settings?desc-error=$description_error");
+    }
 }
 
-function handle_delete_profile()
-{
+function handle_delete_profile() {
     $user = user_session_helper(SessionManager::get_session());
 
     $password = $_POST["password"] ?? "";
@@ -78,19 +90,23 @@ function handle_delete_profile()
         header("Location: .?error=Sikeresen törölted a fiókodat!");
         exit();
     } else {
-        header("Location: settings?remove-error=Hibás jelszó!");
+        header("Location: profile-settings?remove-error=Hibás jelszó!");
     }
 }
 
-function handle_update_visibility()
-{
+function handle_update_visibility() {
     $user = user_session_helper(SessionManager::get_session());
 
     $visibility = $_POST["visible"] === "on";
 
     $user->set_private(!$visibility);
     Database::get_instance()->update_user($user);
+    ProfilePicture::remove_profile_picture($user->get_name());
 
-    header("Location: settings");
+    header(
+        "Location: profile?user=" .
+            $user->get_name() .
+            "&success=Sikeresen frissítetted a láthatóságodat!"
+    );
 }
 ?>

@@ -8,7 +8,7 @@ class ProfilePicture {
 
         copy("assets/img/default-profilepicture.png", "pfp/$path");
 
-        return $path;
+        return "pfp/" . $path;
     }
 
     public static function update_profile_picture(
@@ -33,16 +33,23 @@ class ProfilePicture {
             return "A kép mérete túl nagy.";
         }
 
-        if (
-            !rename(
-                $new_profile_picture["tmp_name"],
-                "pfp/$profile_picture_path"
-            )
-        ) {
+        if (!rename($new_profile_picture["tmp_name"], $profile_picture_path)) {
             return "A kép feltöltése nem sikerült.";
         }
 
         return null;
+    }
+
+    public static function remove_profile_picture(string $username): void {
+        $user = Database::get_instance()->get_user($username);
+        if ($user == null) {
+            return;
+        }
+
+        $profile_picture_path = $user->get_profile_picture_url();
+        if (file_exists($profile_picture_path)) {
+            unlink($profile_picture_path);
+        }
     }
 }
 

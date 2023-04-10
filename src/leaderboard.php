@@ -4,6 +4,19 @@ spl_autoload_register(function ($class_name) {
 });
 
 $users = Database::get_instance()->get_users();
+
+$topList = [];
+
+foreach ($users as $user) {
+    $topList[$user->get_name()] = count(
+        Database::get_instance()->get_sightings_by_user($user->get_name())
+    );
+}
+
+arsort($topList);
+$topList = array_slice($topList, 0, min(5, count($users)), true);
+
+$index = 1;
 ?>
 
 <!DOCTYPE html>
@@ -43,11 +56,11 @@ $users = Database::get_instance()->get_users();
                 <th>Bejelentő neve</th>
                 <th>Bejelentések száma</th>
             </tr>
-            <?php foreach ($users as $index => $user): ?>
-
+            <?php foreach ($topList as $username => $amount): ?>
+                <?php $user = Database::get_instance()->get_user($username); ?>
                 <tr id="tr<?= $index ?>">
                     <td>
-                        <?= $index + 1 ?>
+                        <?= $index ?>
                     </td>
                     <td>
                         <a href="<?= $user->is_private() &&
@@ -61,12 +74,12 @@ $users = Database::get_instance()->get_users();
                         </a>
                     </td>
                     <td>
-                        <?= rand(3, 42690) ?>
+                        <?= $amount ?>
                     </td>
                 </tr>
 
 
-            <?php endforeach; ?>
+            <?php $index++;endforeach; ?>
         </table>
 
     </main>

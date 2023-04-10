@@ -8,6 +8,22 @@ class Database {
      */
     private ?array $users = null;
 
+    /**
+     * @var Sighting[]
+     */
+    private ?array $sightings = null;
+
+    /**
+     * @var Message[]
+     */
+    private ?array $messages = null;
+
+    private function __construct() {
+        if (!file_exists("data")) {
+            mkdir("data");
+        }
+    }
+
     public static function get_instance(): Database {
         if (self::$instance == null) {
             self::$instance = new Database();
@@ -22,17 +38,17 @@ class Database {
     public function get_users(): array {
         if ($this->users == null) {
             $this->users = [];
-            if (!file_exists("data/users.json")) {
+            if (!file_exists("data/.users.json")) {
                 return $this->users;
             }
 
             $users_dump = json_decode(
-                file_get_contents("data/users.json"),
+                file_get_contents("data/.users.json"),
                 true
             );
 
             foreach ($users_dump as $user_dump) {
-                array_push($this->users, User::from_dump($user_dump));
+                $this->users[] = User::from_dump($user_dump);
             }
         }
 
@@ -43,11 +59,11 @@ class Database {
         $users_dump = [];
 
         foreach ($this->users as $user) {
-            array_push($users_dump, $user->dump());
+            $users_dump[] = $user->dump();
         }
 
         file_put_contents(
-            "data/users.json",
+            "data/.users.json",
             json_encode($users_dump, JSON_PRETTY_PRINT)
         );
     }
@@ -89,6 +105,81 @@ class Database {
             if ($this->users[$i]->get_name() == $user->get_name()) {
                 array_splice($this->users, $i, 1);
                 $this->save_users();
+                return;
+            }
+        }
+    }
+
+    /**
+     * @return Sighting[]
+     */
+    public function get_sightings(): array {
+        if ($this->sightings == null) {
+            $this->sightings = [];
+            if (!file_exists("data/.sightings.json")) {
+                return $this->sightings;
+            }
+
+            $sightings_dump = json_decode(
+                file_get_contents("data/.sightings.json"),
+                true
+            );
+
+            foreach ($sightings_dump as $sighting_dump) {
+                $this->sightings[] = Sighting::from_dump($sighting_dump);
+            }
+        }
+
+        return $this->sightings;
+    }
+
+    /**
+     * @return Sighting[]
+     */
+    public function get_sightings_by_user(string $username): array {
+        $this->get_sightings();
+        $sightings = [];
+
+        foreach ($this->sightings as $sighting) {
+            if ($sighting->get_username() == $username) {
+                $sightings[] = $sighting;
+            }
+        }
+
+        return $sightings;
+    }
+
+    public function save_sightings(): void {
+        $sightings_dump = [];
+
+        foreach ($this->sightings as $sighting) {
+            $sightings_dump[] = $sighting->dump();
+        }
+
+        file_put_contents(
+            "data/.sightings.json",
+            json_encode($sightings_dump, JSON_PRETTY_PRINT)
+        );
+    }
+
+    public function add_sighting(Sighting $sighting): void {
+        $this->get_sightings();
+        array_push($this->sightings, $sighting);
+        $this->save_sightings();
+    }
+
+    public function remove_sighting(Sighting $sighting): void {
+        $this->get_sightings();
+
+        for ($i = 0; $i < count($this->sightings); $i++) {
+            if (
+                $this->sightings[$i]->get_timestamp() ==
+                    $sighting->get_timestamp() &&
+                $this->sightings[$i]->get_username() ==
+                    $sighting->get_username()
+            ) {
+                array_splice($this->sightings, $i, 1);
+                $this->save_sightings();
                 return;
             }
         }
