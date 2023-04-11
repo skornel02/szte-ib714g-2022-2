@@ -1,7 +1,14 @@
 <?php
+define("MAXUSER", 3);
+
 spl_autoload_register(function ($class_name) {
     require "classes/" . $class_name . ".hidden.php";
 });
+
+if (isset($_GET["allusers"])) {
+    setcookie("allusers", $_GET["allusers"] === "true" ? "true" : "", time() + 60 * 60 * 24 * 30);
+    header("Location: leaderboard");
+}
 
 $users = Database::get_instance()->get_users();
 
@@ -14,7 +21,12 @@ foreach ($users as $user) {
 }
 
 arsort($topList);
-$topList = array_slice($topList, 0, min(5, count($users)), true);
+
+$all_users_show = $_COOKIE["allusers"] ?? false;
+
+if (!$all_users_show) {
+    $topList = array_slice($topList, 0, min(MAXUSER, count($users)), true);
+}
 
 $index = 1;
 ?>
@@ -64,11 +76,11 @@ $index = 1;
                     </td>
                     <td>
                         <a href="<?= $user->is_private() &&
-                        !SessionManager::is_admin()
+                            !SessionManager::is_admin()
                             ? "#tr$index"
                             : "profile?user=" . $user->get_name() ?>">
                             <?= $user->is_private() &&
-                            !SessionManager::is_admin()
+                                !SessionManager::is_admin()
                                 ? "[PRIVATE]"
                                 : $user->get_name() ?>
                         </a>
@@ -79,9 +91,18 @@ $index = 1;
                 </tr>
 
 
-            <?php $index++;endforeach; ?>
+                <?php $index++; endforeach; ?>
         </table>
-
+        <hr>
+        <?php if (!$all_users_show): ?>
+            <div class="center">
+                <a href="leaderboard?allusers=true">Mutasd az összes felhasználót</a>
+            </div>
+        <?php else: ?>
+            <div class="center">
+                <a href="leaderboard?allusers=false">Csak a legjobbakat mutasd</a>
+            </div>
+        <?php endif; ?>
     </main>
 
     <?php include "templates/footer.hidden.php"; ?>

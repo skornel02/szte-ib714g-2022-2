@@ -5,7 +5,7 @@ spl_autoload_register(function ($class_name) {
 
 $error_message = null;
 
-$username = trim($_POST["username"] ?? "");
+$username = trim($_POST["username"] ?? $_COOKIE["username"] ?? "");
 $email = trim($_POST["email"] ?? "");
 $password = $_POST["secret"] ?? "";
 $password2 = $_POST["secret2"] ?? "";
@@ -96,6 +96,12 @@ function handle_login(string $username, string $password): string|null {
         return "Hibás jelszó!";
     }
 
+    if (isset($_POST["remember"]) && $_POST["remember"] == "on") {
+        setcookie("username", $user->get_name(), time() + 60 * 60 * 24 * 30);
+    } else {
+        setcookie("username", "", time() - 3600);
+    }
+
     SessionManager::login($user);
     $user->set_last_logged_in(time());
     Database::get_instance()->update_user($user);
@@ -166,6 +172,10 @@ function handle_register(
                     <label for="psw">
                         Jelszó
                         <input type="password" name="secret" required value="<?= $password ?>">
+                    </label>
+                    <label>
+                        Emlékezzen rám
+                        <input type="checkbox" name="remember" <?= isset($_COOKIE["username"]) ? "checked" : "" ?>>
                     </label>
                     <?php if ($error_message != null) {
                         echo $error_message;

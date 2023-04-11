@@ -16,7 +16,7 @@ $errors = [];
  */
 $sightings = [];
 
-if ($_SERVER["REQUEST_METHOD"] === "POST" && !isset($_POST["Reset"])) {
+if (isset($_POST["create"])) {
     $user = SessionManager::get_session();
     $date = $_POST["date"] ?? "";
     $time = $_POST["time"] ?? "";
@@ -78,10 +78,28 @@ if (SessionManager::is_logged_in()) {
     $sightings = Database::get_instance()->get_sightings_by_user(
         SessionManager::get_session()->get_name()
     );
+
+    if (isset($_POST["delete"])) {
+        $delete_timestamp = $_POST["find-timestamp"] ?? "";
+        $delete_country = $_POST["find-country"] ?? "";
+
+        foreach ($sightings as $sighting) {
+            if (
+                $sighting->get_timestamp() == $delete_timestamp &&
+                $sighting->get_country() == $delete_country
+            ) {
+                Database::get_instance()->remove_sighting($sighting);
+                header("Location: finder?success=Sikeres törlés!");
+                exit();
+            }
+        }
+    }    
 }
 
 $error = implode("<br>", $errors);
 $_GET["errors"] = $error ?? null;
+
+$latest_sighting = Database::get_instance()->get_latest_sighting();
 ?>
 
 <!DOCTYPE html>
@@ -105,6 +123,45 @@ $_GET["errors"] = $error ?? null;
             Segíts felderíteni a Pápa helyzetét! Ha szemtanúja voltál, esetleg ráutoló nyomot találtál Őszentsége
             tartózkodási helyére, ne habozz, töltsd ki az alábbi űrlapot!
         </p>
+        <div>
+            <h2> Legfrissebb jelentés: </h2>
+            <?php if ($latest_sighting != null) { ?>
+
+            <p>
+                <strong>Találat ideje:</strong>
+                <?= date("Y.m.d H:i", $latest_sighting->get_timestamp()) ?>
+            </p>
+            <p>
+                <strong>Találat bizonyossága:</strong>
+                <?= $latest_sighting->get_certainty() * 100 ?>%
+            </p>
+            <p>
+                <strong>Találat országa:</strong>
+                <?= $latest_sighting->get_country() ?>
+            </p>
+            <p>
+                <strong>Találat típusa:</strong>
+                <?= $latest_sighting->get_type() ?>
+            </p>
+            <p>
+                <strong>Jelentő:</strong>
+                <?php
+                    $sighter = Database::get_instance()->get_user(
+                        $latest_sighting->get_username()
+                    );
+                    if ($sighter != null && !$sighter->is_private()) {
+                        echo "<a href='profile?user="  . $sighter->get_name() . "'>" . $sighter->get_name() . '</a>';
+                    } else {
+                        echo "Névtelen";
+                    }
+                ?>
+            </p>
+            <?php } else { ?>
+            <p>
+                Még nem érkezett jelentés! 🤔
+            </p>
+            <?php } ?>
+        </div>
         <?php if (SessionManager::is_logged_in()) { ?>
         <div>
             <h2>Jelentés</h2>
@@ -162,22 +219,13 @@ SightingType::Indirect->name
                         Alapállapot
                     </button>
 
-                    <button type="submit">
+                    <button type="submit" name="create">
                         Jelentés elküldése
                     </button>
 
                 </fieldset>
             </form>
         </div>
-        <?php } else { ?>
-        <div>
-            <h2>Jelentések</h2>
-            <p>
-                A jelentések megtekintéséhez jelentkezz be!
-            </p>
-
-        </div>
-        <?php } ?>
         <div>
             <h2>Jelentéseim</h2>
             <?php if (count($sightings) === 0) { ?>
@@ -195,6 +243,7 @@ SightingType::Indirect->name
                         <th>Ország</th>
                         <th>Típus</th>
                         <th>Bizonyosság</th>
+                        <th>🚮</th>
                     </tr>
                 </thead>
                 <tbody>
@@ -207,6 +256,15 @@ SightingType::Indirect->name
                         <td><?= $sighting->get_country() ?></td>
                         <td><?= $sighting->get_type() ?></td>
                         <td><?= $sighting->get_certainty() ?></td>
+                        <td>
+                            <form action="finder" method="POST">
+                                <input type="hidden" name="find-timestamp" value="<?= $sighting->get_timestamp() ?>">
+                                <input type="hidden" name="find-country" value="<?= $sighting->get_country() ?>">
+                                <button type="submit" name="delete">
+                                    🗑️
+                                </button>
+                            </form>
+                        </td>
                     </tr>
                     <?php } ?>
                 </tbody>
@@ -214,6 +272,15 @@ SightingType::Indirect->name
 
             <?php } ?>
         </div>
+        <?php } else { ?>
+        <div>
+            <h2>Jelentés</h2>
+            <p>
+                A jelentés küldéséhez jelentkezz be!
+            </p>
+
+        </div>
+        <?php } ?>
     </main>
 
     <?php include "templates/footer.hidden.php"; ?>

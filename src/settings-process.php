@@ -101,7 +101,6 @@ function handle_update_visibility() {
 
     $user->set_private(!$visibility);
     Database::get_instance()->update_user($user);
-    ProfilePicture::remove_profile_picture($user->get_name());
 
     header(
         "Location: profile?user=" .

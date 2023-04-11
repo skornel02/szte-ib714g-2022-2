@@ -103,8 +103,21 @@ class Database {
 
         for ($i = 0; $i < count($this->users); $i++) {
             if ($this->users[$i]->get_name() == $user->get_name()) {
+                ProfilePicture::remove_profile_picture($user->get_name());
+
+                foreach ($this->get_sightings_by_user($user->get_name()) as $sighting) {
+                    $this->remove_sighting($sighting);
+                }
+
+                foreach ($this->get_messages($user->get_name()) as $message) {
+                    if ($message->get_sender_name() == $user->get_name() || $message->get_receiver_name() == $user->get_name()) {
+                        $this->remove_message($message);
+                    }
+                }
+
                 array_splice($this->users, $i, 1);
                 $this->save_users();
+
                 return;
             }
         }
@@ -149,6 +162,24 @@ class Database {
         return $sightings;
     }
 
+    public function get_latest_sighting(): Sighting | null {
+        $this->get_sightings();
+
+        if (count($this->sightings) == 0) {
+            return null;
+        }
+
+        $latest_sighting = $this->sightings[0];
+
+        foreach ($this->sightings as $sighting) {
+            if ($sighting->get_timestamp() > $latest_sighting->get_timestamp()) {
+                $latest_sighting = $sighting;
+            }
+        }
+
+        return $latest_sighting;
+    }
+
     public function save_sightings(): void {
         $sightings_dump = [];
 
@@ -183,6 +214,80 @@ class Database {
                 return;
             }
         }
+    }
+
+    /**
+     * @return Message[]
+     */
+    public function get_messages(): array {
+        if ($this->messages == null) {
+            $this->messages = [];
+            if (!file_exists("data/.messages.json")) {
+                return $this->messages;
+            }
+
+            $messages_dump = json_decode(
+                file_get_contents("data/.messages.json"),
+                true
+            );
+
+            foreach ($messages_dump as $message_dump) {
+                $this->messages[] = Message::from_dump($message_dump);
+            }
+        }
+
+        return $this->messages;
+    }
+
+    public function save_messages(): void {
+        $messages_dump = [];
+
+        foreach ($this->messages as $message) {
+            $messages_dump[] = $message->dump();
+        }
+
+        file_put_contents(
+            "data/.messages.json",
+            json_encode($messages_dump, JSON_PRETTY_PRINT)
+        );
+    }
+
+    public function add_message(Message $message): void {
+        $this->get_messages();
+        array_push($this->messages, $message);
+        $this->save_messages();
+    }
+
+    public function remove_message(Message $message): void {
+        $this->get_messages();
+
+        for ($i = 0; $i < count($this->messages); $i++) {
+            if ($this->messages[$i]->get_message() == $message->get_message() 
+                    && $this->messages[$i]->get_receiver_name() == $message->get_receiver_name() 
+                    && $this->messages[$i]->get_sender_name() == $message->get_sender_name() 
+                    && $this->messages[$i]->get_date() == $message->get_date()
+            ) {
+                array_splice($this->messages, $i, 1);
+                $this->save_messages();
+                return;
+            }
+        }
+    }
+
+    /**
+     * @return Message[]
+     */
+    public function get_messages_by_user(string $username): array {
+        $this->get_messages();
+        $messages = [];
+
+        foreach ($this->messages as $message) {
+            if ($message->get_receiver_name() == $username) {
+                $messages[] = $message;
+            }
+        }
+
+        return $messages;
     }
 }
 

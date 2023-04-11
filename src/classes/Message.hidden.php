@@ -5,7 +5,6 @@ class Message {
     private string $sender_name;
     private string $receiver_name;
     private int $date;
-    private bool $seen;
 
     public function __construct(
         string $message,

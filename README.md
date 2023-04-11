@@ -104,15 +104,15 @@
         - [ ] Minden szükséges fájl benne van.
         - [ ] Logikus mappafelépítés.
         - [ ] Érvényes (**relatív**) útvonalak vannak megadva.
-    - [ ] Projekt téma
-        - [ ] Minden oldal a témával kapcsolatos.
-        - [ ] Az 1. mérföldkő projektje lett folytatva.
-    - [ ] Szabványos HTML oldalak
-        - [ ] Legalább 5 darab _szabványos_ HTML oldal _kellő_ részleteséggel.
-    - [ ] Biztonságos adatkezelés
-        - [ ] Bizalmas adatok HTTP POST segítségével továbbítódnak.
-    - [ ] Felhasznált technológiák
-        - [ ] Csak használható technológiákat tartalmaz _(lásd CooSpace)_.
+    - [x] Projekt téma
+        - [x] Minden oldal a témával kapcsolatos.
+        - [x] Az 1. mérföldkő projektje lett folytatva.
+    - [x] Szabványos HTML oldalak
+        - [x] Legalább 5 darab _szabványos_ HTML oldal _kellő_ részleteséggel.
+    - [x] Biztonságos adatkezelés
+        - [x] Bizalmas adatok HTTP POST segítségével továbbítódnak.
+    - [x] Felhasznált technológiák
+        - [x] Csak használható technológiákat tartalmaz _(lásd CooSpace)_.
     - [x] Súlyos hibák
         - [x] Gyakorlatvezető ítéli meg...
 2. Általános szempontok (max: 25 pont)
@@ -127,10 +127,10 @@
         - [ ] Nincsenek hibák (waring, notice) és rosszul beállított elemek, a funkciók működnek (0/3 pont).
         - [ ] Intuitív űrlapok, követelmények jelezve vannak előre (0/3 pont).
         - [ ] Megvalósított funkciók használata kényelmes (0/2/5 pont).
-    - [ ] Technikai elemek - 9 pont
-        - [ ] GET paraméterek megfelelő használata (0/2 pont).
-        - [ ] Objektumorientáltság megfelelő használata (0/2/4 pont).
-        - [ ] Sütik értelmes módon való használata (0/3 pont).
+    - [x] Technikai elemek - 9 pont
+        - [x] GET paraméterek megfelelő használata (0/2 pont).
+        - [x] Objektumorientáltság megfelelő használata (0/2/4 pont).
+        - [x] Sütik értelmes módon való használata (0/3 pont).
 3. Megvalósított funkciók (max: 65 pont)
     - [x] Regisztráció - 13 pont
         - [x] Van működő regisztráció, regisztráció során az adatok eltárolódnak (0/2 pont).
@@ -151,7 +151,7 @@
         - [x] Fiók törlése (0/4 pont).
         - [x] Más felhasználók fiókjának megtektinése (publikus adatok elérése), saját adataink publikálása (0/4/8 pont).
         - [x] Olyan interakciók amik ki- és bejelentkezés után is megmaradnak (értékelés, poszt, barátok, termékek a kosárban) (0/4/8 pont).
-        - [ ] Üzenetküldés a felhasználók között (0/4/8 pont).
+        - [x] Üzenetküldés a felhasználók között (0/4/8 pont).
         - [x] Jogosultsági szintek megvalósítva (admin, felhasználók) (0/4/8 pont).
         - [x] Egyéb funkciók (0/4/8 pont).
 
