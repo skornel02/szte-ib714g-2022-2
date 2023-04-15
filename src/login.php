@@ -173,13 +173,13 @@ function handle_register(
                         Jelszó
                         <input type="password" name="secret" required value="<?= $password ?>">
                     </label>
-                    <label>
+                    <label class="center-label">
                         Emlékezzen rám
                         <input type="checkbox" name="remember" <?= isset($_COOKIE["username"]) ? "checked" : "" ?>>
                     </label>
                     <?php if ($error_message != null) {
                         echo $error_message;
-                    } ?> <!-- TODO: make this pretty please -->
+                    } ?>
                     <input type="hidden" name="action" value="login">
                     <button type="submit">Bejelentkezés</button>
                 </fieldset>
@@ -213,7 +213,7 @@ function handle_register(
                     </label>
                     <?php if ($error_message != null) {
                         echo $error_message;
-                    } ?> <!-- TODO: make this pretty please -->
+                    } ?>
                     <input type="hidden" name="action" value="register">
                     <button type="submit">Regisztráció</button>
                 </fieldset>

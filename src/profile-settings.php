@@ -38,7 +38,7 @@ $session = SessionManager::get_session() ?? die("Session error");
     <?php require "templates/navbar.hidden.php"; ?>
 
     <main>
-        <h1>Beállítások</h1>
+        <h1 class="full-width-title">Beállítások</h1>
 
         <form action="settings-process" method="post" enctype="multipart/form-data">
             <fieldset>
@@ -51,7 +51,7 @@ $session = SessionManager::get_session() ?? die("Session error");
                 </label>
                 <?php if ($pfp_error != null) {
                     echo $pfp_error;
-                } ?> <!-- TODO: make this pretty please -->
+                } ?>
                 <input type="hidden" name="action" value="<?= ProfileAction
                     ::UpdateProfilePicture->name ?>">
                 <button type="submit">
@@ -69,7 +69,7 @@ $session = SessionManager::get_session() ?? die("Session error");
                     maxlength="400"><?= $session->get_description() ?></textarea>
                 <?php if ($description_error != null) {
                     echo $description_error;
-                } ?> <!-- TODO: make this pretty please -->
+                } ?>
                 <input type="hidden" name="action" value="<?= ProfileAction
                     ::UpdateDescription->name ?>">
                 <button type="submit">
@@ -80,7 +80,7 @@ $session = SessionManager::get_session() ?? die("Session error");
         <form action="settings-process" method="post">
             <fieldset>
                 <legend>Fiók láthatóság</legend>
-                <label>
+                <label class="center-label">
                     Látható mindenki által
                     <input type="checkbox" name="visible" <?= $session->is_private()
                         ? ""
@@ -102,7 +102,7 @@ $session = SessionManager::get_session() ?? die("Session error");
                 </label>
                 <?php if ($remove_error != null) {
                     echo $remove_error;
-                } ?> <!-- TODO: make this pretty please -->
+                } ?>
                 <input type="hidden" name="action" value="<?= ProfileAction
                     ::DeleteProfile->name ?>">
                 <button type="submit">

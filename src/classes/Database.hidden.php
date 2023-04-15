@@ -22,6 +22,10 @@ class Database {
         if (!file_exists("data")) {
             mkdir("data");
         }
+
+        if (!file_exists("pfp")) {
+            mkdir("pfp");
+        }
     }
 
     public static function get_instance(): Database {

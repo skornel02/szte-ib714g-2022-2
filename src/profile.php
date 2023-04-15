@@ -79,7 +79,7 @@ if (isset($_POST["delete-comment"]) && $session !== null) {
     <?php require "templates/navbar.hidden.php"; ?>
 
     <main>
-        <h1>
+        <h1 class="full-width-title">
             <?= $user->get_name() ?>
         </h1>
         <?= $user->is_admin() ? "<h2>ADMIN</h2>" : "" ?>
