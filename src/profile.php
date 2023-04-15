@@ -20,10 +20,9 @@ if ($user == null || !$can_see) {
 
 $session = SessionManager::get_session();
 
-$comment_error = null;
+$errors = [];
 if (isset($_POST["add-comment"])) {
     $message = trim($_POST["message"] ?? "");
-    $errors = [];
 
     if ($session === null) {
         $errors[] = "Be kell jelentkezni, hogy kommentelhess!";
@@ -82,11 +81,11 @@ if (isset($_POST["delete-comment"]) && $session !== null) {
         <h1 class="full-width-title">
             <?= $user->get_name() ?>
         </h1>
+        <img src="<?= $user->get_profile_picture_url() ?>" alt="profilkép" title="Avatar"
+            class="image pfp-large center-image image-fluid round-image fade-and-scale">
         <?= $user->is_admin() ? "<h2>ADMIN</h2>" : "" ?>
         <?= $user->is_private() ? "<h2>Privát profil</h2>" : "" ?>
         <?= $is_self ? "<a href=\"profile-settings\">Beállítások</a>" : "" ?>
-        <img src="<?= $user->get_profile_picture_url() ?>" alt="profilkép" title="Avatar"
-            class="image pfp center-image image-fluid round-image fade-and-scale">
         <p> Utoljára belépve:
             <time datetime="<?= $user->get_last_logged_in() ?>">
                 <script>document.write(new Date(1000 * <?= $user->get_last_logged_in() ?>).toLocaleString())</script>
@@ -109,14 +108,16 @@ if (isset($_POST["delete-comment"]) && $session !== null) {
 
         <div class="comment">
             <div class="comment-header">
-                <!-- <img src="<?= $sender->get_profile_picture_url() ?>" alt="profilkép" title="Avatar"
-                    class="image pfp center-image image-fluid round-image fade-and-scale"> todo: make me pretty-->
-                <p>
-                    <?= $sender->get_name() ?>
-                </p>
-                <time datetime="<?= $comment->get_date() ?>">
-                    <script>document.write(new Date(1000 * <?= $comment->get_date() ?>).toLocaleString())</script>
-                </time>
+                <img src="<?= $sender->get_profile_picture_url() ?>" alt="profilkép" title="Avatar"
+                    class="image inline pfp image-fluid round-image fade-and-scale">
+                <div>
+                    <p>
+                        <?= $sender->get_name() ?>
+                    </p>
+                    <time datetime="<?= $comment->get_date() ?>">
+                        <script>document.write(new Date(1000 * <?= $comment->get_date() ?>).toLocaleString())</script>
+                    </time>
+                </div>
             </div>
             <p>
                 <?= $comment->get_message() ?>
@@ -136,7 +137,15 @@ if (isset($_POST["delete-comment"]) && $session !== null) {
         <h2>Új komment</h2>
         <form action="profile?user=<?= $username ?>" method="POST">
             <textarea name="message" id="message" cols="30" rows="10" placeholder="Üzenet"></textarea>
-            <label for="message"><?= $comment_error ?></label> <!-- Please make this pretty -->
+            <label for="message">
+                <?php 
+                    if (count($errors) !== 0) {
+                        foreach ($errors as $error) {
+                            echo $error;
+                        }
+                    }
+                ?>
+            </label>
             <input type="submit" name="add-comment" value="Küldés">
         </form>
         <?php } else { ?>

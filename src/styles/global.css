@@ -145,7 +145,32 @@ a {
 
 .image.pfp {
     min-width: unset;
+    max-width: 120px;
+}
+
+.image.pfp-large {
+    min-width: unset;
     max-width: 160px;
+}
+
+.inline {
+    display: inline-block;
+}
+
+.comment-header {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+}
+
+.comment-header > div {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+}
+
+.comment-header p {
+    margin-right: 50px;
 }
 
 .center-image {
