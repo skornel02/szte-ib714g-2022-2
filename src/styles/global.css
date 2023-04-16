@@ -313,9 +313,13 @@ button {
     margin-right: auto;
 }
 
-button:hover {
+button:hover:not([disabled]) {
     background-color: var(--color-nav-background);
     color: var(--color-neutral);
+}
+
+button[disabled] {
+    cursor: not-allowed;
 }
 
 input:not([type="date"]) {

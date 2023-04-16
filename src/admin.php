@@ -30,8 +30,8 @@ if (isset($_POST["find-delete"])) {
     }
 }
 
-if (isset($_POST["user-delete"])) {
-    $username = $_POST["user-username"] ?? "";
+$username = $_POST["user-username"] ?? "";
+if (isset($_POST["user-delete"]) && SessionManager::get_session()->get_name() !== $username) {
 
     foreach ($users as $user) {
         if ($user->get_name() == $username) {
@@ -83,7 +83,8 @@ if (isset($_POST["user-delete"])) {
                         <td>
                             <form action="admin" method="POST">
                                 <input type="hidden" name="user-username" value="<?= $user->get_name() ?>">
-                                <button type="submit" name="user-delete">
+                                <button type="submit" name="user-delete"
+                                    <?= SessionManager::get_session()->get_name() === $user->get_name() ? "disabled" : "" ?>>
                                     🗑️
                                 </button>
                             </form>
