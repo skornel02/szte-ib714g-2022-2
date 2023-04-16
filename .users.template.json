@@ -1,0 +1,22 @@
+[
+    {
+        "name": "admin",
+        "email": "admin@admin.admin",
+        "password_hash": "$2y$10$nITd5bPh4MkCozrTv72aeuQ7jbE.C7R.lN13GHeiL196nvq1IPuJ2",
+        "profile_picture_url": "pfp\/admin.jpg",
+        "last_logged_in": 1681634737,
+        "description": "\ud83d\udc31\ud83d\udc31\ud83d\udc31\ud83d\udc31\ud83d\udc31\ud83d\udc31\ud83d\udc31\ud83d\udc31\ud83d\udc31\ud83d\udc31\ud83d\udc31\ud83d\udc31\ud83d\udc31\ud83d\udc31\ud83d\udc31\ud83d\udc31\ud83d\udc31\ud83d\udc31\ud83d\udc31\ud83d\udc31\ud83d\udc31\ud83d\udc31",
+        "is_private": false,
+        "is_admin": true
+    },
+    {
+        "name": "user",
+        "email": "a@b.c",
+        "password_hash": "$2y$10$4EEZDLkCN2TfoWEc\/ckCpu3SX9RENtvzO3PiLSsonxNIvu8KyOdHy",
+        "profile_picture_url": "pfp\/user.png",
+        "last_logged_in": 1681634583,
+        "description": "\ud83d\udc31\ud83d\udc31\ud83d\udc31\ud83d\udc31\ud83d\udc31\ud83d\udc31\ud83d\udc31\ud83d\udc31\ud83d\udc31\ud83d\udc31\ud83d\udc31\ud83d\udc31\ud83d\udc31\ud83d\udc31\ud83d\udc31\ud83d\udc31\ud83d\udc31\ud83d\udc31\ud83d\udc31\ud83d\udc31\ud83d\udc31\ud83d\udc31",
+        "is_private": true,
+        "is_admin": false
+    }
+]

@@ -97,7 +97,7 @@ if (SessionManager::is_logged_in()) {
 }
 
 $error = implode("<br>", $errors);
-$_GET["errors"] = $error ?? null;
+$_GET["error"] = $error ?? null;
 
 $latest_sighting = Database::get_instance()->get_latest_sighting();
 ?>

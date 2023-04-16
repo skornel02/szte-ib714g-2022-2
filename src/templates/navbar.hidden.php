@@ -8,7 +8,7 @@ function create_attributes_for_link($path) {
 
     if (
         ($path == "." && str_ends_with($_SERVER["REQUEST_URI"], "/")) ||
-        ($path != "." && strpos($_SERVER["REQUEST_URI"], $path) !== false)
+        ($path != "." && strpos($_SERVER["REQUEST_URI"], '/' . $path) !== false)
     ) {
         $href = "#top";
         $class = "active";

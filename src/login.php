@@ -200,7 +200,7 @@ function handle_register(
                         <input type="text" name="username" required value="<?= $username ?>">
                     </label>
                     <label for="psw">
-                        Jelszó
+                        Jelszó (minimum 8 hosszú)
                         <input type="password" name="secret" minlength="8" required value="<?= $password ?>">
                     </label>
                     <label for="psw">
