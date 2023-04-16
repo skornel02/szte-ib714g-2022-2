@@ -111,7 +111,7 @@ if (isset($_POST["delete-comment"]) && $session !== null) {
                 <img src="<?= $sender->get_profile_picture_url() ?>" alt="profilkép" title="Avatar"
                     class="image inline pfp image-fluid round-image fade-and-scale">
                 <div>
-                    <p>
+                    <p class="username">
                         <?= $sender->get_name() ?>
                     </p>
                     <time datetime="<?= $comment->get_date() ?>">
