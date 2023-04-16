@@ -56,7 +56,7 @@ if (isset($_POST["user-delete"])) {
     <?php require "templates/navbar.hidden.php"; ?>
 
     <main>
-        <h1>Admin funkciók</h1>
+        <h1 class="full-width-title">Admin funkciók</h1>
         <hr>
         <h2>Felhasználók
             <?= "(" . count($users) . ")" ?>
