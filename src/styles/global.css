@@ -157,6 +157,27 @@ a {
     display: inline-block;
 }
 
+.comment {
+    background-color: var(--color-hero-background);
+    padding: 10px;
+    border-radius: 5px;
+    box-shadow: 0 0 5px 1px var(--color-transparent-black);
+}
+
+.comment time {
+    font-family: "Roboto", sans-serif;
+    font-style: italic;
+    font-size: 0.9em;
+}
+
+.comment .pfp {
+    border: 2px solid var(--color-nav-background);
+}
+
+.comment .username {
+    font-variant: small-caps;
+}
+
 .comment-header {
     display: flex;
     flex-direction: row;
@@ -170,7 +191,7 @@ a {
 }
 
 .comment-header p {
-    margin-right: 50px;
+    margin: auto 50px;
 }
 
 .center-image {
